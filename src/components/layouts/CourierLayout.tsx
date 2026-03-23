@@ -1,7 +1,7 @@
 import { Outlet, Link, useLocation } from "react-router-dom";
 import { ClipboardList, DollarSign, Settings } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { NotificationDropdown } from "@/components/shared/NotificationDropdown";
+import { NotificationDropdown } from "@/components/shared/NotificationDropdown.tsx";
 
 const navItems = [
   { to: "/courier", icon: ClipboardList, label: "Tugas" },

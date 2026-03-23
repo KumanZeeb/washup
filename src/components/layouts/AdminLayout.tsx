@@ -3,7 +3,7 @@ import {
   LayoutDashboard, ShoppingBag, Users, Wrench, Tag, BarChart3, LogOut, Menu, WashingMachine, Info, Settings,
 } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
-import { NotificationDropdown } from "@/components/shared/NotificationDropdown";
+import { NotificationDropdown } from "@/components/shared/NotificationDropdown.tsx";
 import { Button } from "@/components/ui/button";
 import { useAuthStore } from "@/store/authStore";
 import {
