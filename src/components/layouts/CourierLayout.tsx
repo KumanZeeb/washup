@@ -1,12 +1,12 @@
 import { Outlet, Link, useLocation } from "react-router-dom";
-import { ClipboardList, DollarSign, User } from "lucide-react";
+import { ClipboardList, DollarSign, Settings } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { NotificationDropdown } from "@/components/shared/NotificationDropdown";
 
 const navItems = [
   { to: "/courier", icon: ClipboardList, label: "Tugas" },
   { to: "/courier/earnings", icon: DollarSign, label: "Penghasilan" },
-  { to: "/courier/profile", icon: User, label: "Profil" },
+  { to: "/courier/settings", icon: Settings, label: "Setting" },
 ];
 
 export default function CourierLayout() {

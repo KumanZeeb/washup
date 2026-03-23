@@ -2,17 +2,18 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "@/store/authStore";
 import { useTheme } from "next-themes";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/hooks/use-toast";
-import { User, Phone, Mail, LogOut, Moon, Sun, Globe, Lock, Save, Star, HelpCircle, ChevronRight } from "lucide-react";
+import { Moon, Sun, Globe, User, Lock, ArrowLeft, Save } from "lucide-react";
 
-export default function ProfilePage() {
-  const { user, logout, updateUser } = useAuthStore();
+export default function SettingsPage() {
+  const { user, updateUser } = useAuthStore();
   const { theme, setTheme } = useTheme();
   const { toast } = useToast();
   const navigate = useNavigate();
@@ -24,10 +25,6 @@ export default function ProfilePage() {
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-
-  const isDark = theme === "dark";
-
-  const handleLogout = () => { logout(); navigate("/login"); };
 
   const handleSaveProfile = () => {
     if (!name.trim() || !phone.trim()) {
@@ -57,25 +54,15 @@ export default function ProfilePage() {
     setConfirmPassword("");
   };
 
-  const quickLinks = [
-    { icon: Star, label: "Ulasan Saya" },
-    { icon: HelpCircle, label: "Bantuan" },
-  ];
+  const isDark = theme === "dark";
 
   return (
-    <div className="space-y-5 animate-fade-in">
-      <h2 className="text-lg font-bold">Profil & Pengaturan</h2>
-
-      {/* Profile card */}
-      <div className="flex items-center gap-4 rounded-xl border bg-card p-4 shadow-soft">
-        <div className="flex h-14 w-14 items-center justify-center rounded-full gradient-primary text-primary-foreground text-xl font-bold shrink-0">
-          {user?.name?.charAt(0) || "U"}
-        </div>
-        <div className="min-w-0">
-          <p className="font-semibold truncate">{user?.name}</p>
-          <p className="flex items-center gap-1 text-xs text-muted-foreground"><Phone className="h-3 w-3 shrink-0" /> {user?.phone}</p>
-          <p className="flex items-center gap-1 text-xs text-muted-foreground"><Mail className="h-3 w-3 shrink-0" /> {user?.email}</p>
-        </div>
+    <div className="space-y-5 animate-fade-in max-w-lg mx-auto">
+      <div className="flex items-center gap-3">
+        <Button variant="ghost" size="icon" onClick={() => navigate(-1)}>
+          <ArrowLeft className="h-5 w-5" />
+        </Button>
+        <h2 className="text-lg font-bold">Pengaturan</h2>
       </div>
 
       {/* Tampilan / Dark Mode */}
@@ -86,7 +73,7 @@ export default function ProfilePage() {
             Tampilan
           </CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="space-y-3">
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm font-medium">Mode Gelap</p>
@@ -172,21 +159,6 @@ export default function ProfilePage() {
           </Button>
         </CardContent>
       </Card>
-
-      {/* Quick links */}
-      <div className="rounded-xl border bg-card shadow-soft overflow-hidden">
-        {quickLinks.map((item, i) => (
-          <button key={i} className="flex w-full items-center justify-between p-4 hover:bg-muted/50 transition-colors border-b last:border-b-0">
-            <div className="flex items-center gap-3 text-sm"><item.icon className="h-4 w-4 text-muted-foreground" />{item.label}</div>
-            <ChevronRight className="h-4 w-4 text-muted-foreground" />
-          </button>
-        ))}
-      </div>
-
-      {/* Logout */}
-      <Button variant="outline" className="w-full text-destructive border-destructive/25 hover:bg-destructive/5" onClick={handleLogout}>
-        <LogOut className="mr-2 h-4 w-4" /> Keluar
-      </Button>
     </div>
   );
 }

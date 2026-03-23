@@ -1,6 +1,6 @@
 import { Outlet, useLocation } from "react-router-dom";
 import {
-  LayoutDashboard, ShoppingBag, Users, Wrench, Tag, BarChart3, LogOut, Menu, WashingMachine,
+  LayoutDashboard, ShoppingBag, Users, Wrench, Tag, BarChart3, LogOut, Menu, WashingMachine, Info, Settings,
 } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { NotificationDropdown } from "@/components/shared/NotificationDropdown";
@@ -19,6 +19,8 @@ const links = [
   { to: "/admin/services", icon: Wrench, label: "Layanan" },
   { to: "/admin/promos", icon: Tag, label: "Promo" },
   { to: "/admin/reports", icon: BarChart3, label: "Laporan" },
+  { to: "/admin/dev-info", icon: Info, label: "Info Aplikasi" },
+  { to: "/admin/settings", icon: Settings, label: "Pengaturan" },
 ];
 
 function AdminSidebar() {
@@ -70,7 +72,7 @@ export default function AdminLayout() {
             <div className="flex-1" />
             <NotificationDropdown />
           </header>
-          <main className="flex-1 p-4 md:p-6">
+          <main className="flex-1 p-3 sm:p-4 md:p-6 overflow-x-hidden">
             <Outlet />
           </main>
         </div>
